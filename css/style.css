@@ -1,0 +1,73 @@
+
+
+html, body{
+  padding: 0;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+  background-color: #334;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game{
+  width: 600px;
+  height: 300px;
+  border: 6px solid #223;
+  border-radius: 8px;
+}
+.top-bar{
+  height: 20%;
+  background-color: #445;
+
+}
+.view{
+  display: flex;
+  justify-content: space-between;
+  height: 60%;
+}
+.view>div{
+  width: 30%;
+  border: 1px dashed gray;
+  margin: 10px;
+}
+.view__left{
+  padding: 20px;
+  color: wheat;
+  font-size: 36px;
+}
+.view__center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.view__right{
+  padding: 20px;
+  color: wheat;
+  font-size: 36px;
+}
+/**
+ * controls
+ */
+.controls{
+  height: 20%;
+  background-color: #445;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.controls img{
+  cursor: pointer;
+}
+.controls img:hover{
+  filter: brightness(150%);
+}
