@@ -7,12 +7,16 @@ class Game {
   failureCounter = 0;
   maxTime = 7;
   interval = null;
+  audio = {
+    success: new Audio('audio/success.mp3'),
+    failure: new Audio('audio/failure.mp3'),
+  }
   constructor (view){
     this.__view = view;
     this.reset();
   }
   resetRound (){
-    this.resetTimer();
+    //this.resetTimer();
     this.leftValue = this.generateCandies();
     this.rightValue = this.generateCandies(); 
     this.__view.outputLeft( this.leftValue );
@@ -20,7 +24,7 @@ class Game {
     this.__view.outputRight( this.rightValue );
   }
   resetRoundWithTimeout (){
-    clearInterval(this.interval);
+    //clearInterval(this.interval);
     setTimeout(()=>{
       this.resetRound();
     }, 1000)
@@ -32,6 +36,7 @@ class Game {
     this.__view.outputFailure(0);
     this.resetRound();
   }
+  /*
   resetTimer (){
     this.time = this.maxTime;
     this.__view.outputTimer(this.time);
@@ -43,6 +48,7 @@ class Game {
     }, 1000)
     
   }
+  */
   getRandom (min, max){
       min = Math.ceil(min);
       max = Math.floor(max);
@@ -61,16 +67,22 @@ class Game {
     return candies;
   }
   success (){
+
+    this.audio.success.play();
     this.__view.outputSuccess(++this.successCounter);
     this.__view.outputCenter('success');
     this.resetRoundWithTimeout();
   }
   failure (){
+    this.audio.failure.play();
+    this.checkEndGame();
     this.__view.outputFailure(++this.failureCounter);
     this.__view.outputCenter('failure');
     this.resetRoundWithTimeout();
+
   }
   checkAnswer (value){
+
     switch (value){
       case '<':
         (this.leftValue<this.rightValue)?this.success():this.failure();
@@ -81,6 +93,13 @@ class Game {
       case '>':
         (this.leftValue>this.rightValue)?this.success():this.failure();
         break;
+    }
+  }
+  checkEndGame (){
+
+    if(this.failureCounter===2){
+     // alert('Game over')
+      this.reset();
     }
   }
 }
