@@ -1,20 +1,28 @@
 class View {
-  $left = document.querySelector('.view__left')
-  $center = document.querySelector('.view__center img')
-  $right = document.querySelector('.view__right')
-  controls = document.querySelector('.controls')
-  centerValue = [
-      'img/quetion.png', 
-      'img/control-left.png', 
-      'img/control-center.png',
-      'img/control-right.png'
-  ]
+  $left = document.querySelector('.view__left');
+  $center = document.querySelector('.view__center img');
+  $right = document.querySelector('.view__right');
+  $controls = document.querySelector('.controls');
+  $success = document.querySelector('.top-bar__success--value');
+  $failure = document.querySelector('.top-bar__failure--value');
+  $timer = document.querySelector('.top-bar__timer');
+  statusImg = {
+      quetion: 'img/quetion.png', 
+      success: 'img/success.png', 
+      failure: 'img/failure.png'
+  }
+
+  maxImgIndex = 5;
+
+  getImageNode (img){
+    return `<img class="view__candy" src="img/candy-${img.index}.png" style="transform: rotate(${img.rotate}deg)" />`;
+  }
 
   constructor (){
     this.mount();
   }
   mount (){
-    this.controls.addEventListener('click', e=>{
+    this.$controls.addEventListener('click', e=>{
       if(e.target.tagName!=='IMG') return;
       this.callback(e.target.dataset.value);
     })
@@ -23,13 +31,29 @@ class View {
     this.callback = callback;
   }
   outputLeft (data){
-    this.$left.innerHTML = data
+    this.$left.innerHTML = '';
+    data.forEach(imgData=>{
+        this.$left.innerHTML += this.getImageNode(imgData);
+    })
+    
   }
-  outputCenter (n){
-    this.$center.src = this.centerValue[n];
+  outputCenter (status){
+    this.$center.src = this.statusImg[status];
   }
   outputRight (data){
-    this.$right.innerHTML = data
+    this.$right.innerHTML = '';
+    data.forEach(imgData=>{
+        this.$right.innerHTML += this.getImageNode(imgData);
+    })
+  }
+  outputSuccess (n){
+    this.$success.innerHTML = n;
+  }
+  outputFailure(n){
+    this.$failure.innerHTML = n;
+  }
+  outputTimer (t){
+    this.$timer.innerHTML = t;
   }
 }
 

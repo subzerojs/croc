@@ -9,7 +9,19 @@
 <body>
 
   <div class="game">
-    <div class="top-bar"></div>
+    <div class="top-bar">
+          <div>
+              <div class="top-bar__success">
+                  <span>Правильно: </span>
+                  <span class="top-bar__success--value"></span>
+              </div>
+              <div class="top-bar__failure">
+                  <span>Не правильно: </span>
+                  <span class="top-bar__failure--value"></span>
+              </div>
+          </div>
+          <div class="top-bar__timer"></div>
+    </div>
     <div class="view">
         <div class="view__left"></div>
         <div class="view__center">
@@ -21,7 +33,6 @@
         <img alt="" data-value="<" class="controls__right" src="img/control-left.png"/>
         <img alt="" data-value="=" class="controls__center" src="img/control-center.png"/>
         <img alt="" data-value=">" class="controls__left" src="img/control-right.png"/>
-
     </div>
   </div>
 
